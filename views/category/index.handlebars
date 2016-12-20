@@ -1,16 +1,21 @@
 <a class="btn btn-success btn-default" href='/admin/category/add'>Add Category</a>
 <br />
-
-<h3>Category List</h3>
-<table class="table table-bordered">
-  <tr> 
-    <th>Id</th> 
-    <th>Name</th> 
-    <th>Icon</th>   
-  </tr> 
-  <tr>
-   <td>123556</td> 
-   <td>Technology</td>
-   <td>glyphicon-tech</td> 
-  </tr> 
-</table>
+{{#if categories}}
+  <h3>Category List</h3>
+  <table class="table table-bordered">
+    <tr> 
+      <th>Id</th> 
+      <th>Name</th> 
+      <th>Icon</th>   
+    </tr> 
+    {{#each categories}}
+      <tr>
+       <td>{{_id}}</td> 
+       <td>{{name}}</td>
+       <td>{{icon}}</td> 
+      </tr> 
+    {{/each}}
+  </table>
+{{else}}
+  <h4>No Categories Available. </h4>
+{{/if}}

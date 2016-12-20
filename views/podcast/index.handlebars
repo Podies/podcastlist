@@ -1,19 +1,27 @@
-<a class="btn btn-success btn-default" href='/admin/add'>Add Podcast</a>
+<a class="btn btn-success btn-default" href='/admin/podcast/add'>Add Podcast</a>
 <br />
-<h3> Podcast List</h3>
-<table class="table table-bordered">
-  <tr> 
-    <th>Id</th> 
-    <th>Name</th> 
-    <th>Category</th>
-    <th>Cover</th>
-    <th>Featured</th>   
-  </tr> 
-  <tr>
-   <td>1235</td> 
-   <td>Java Air</td>
-   <td>Programming</td>
-   <td>img.jpg</td>
-   <td>false</td> 
-  </tr> 
-</table>
+{{#if podcasts}} 
+  <h3> Podcast List</h3>
+  <table class="table table-bordered">
+    <tr> 
+      <th>Id</th> 
+      <th>Name</th> 
+      <th>Category</th>
+      <th>Cover</th>
+      <th>Featured</th>   
+    </tr> 
+    {{#each podcasts}}
+      <tr>
+       <td>{{_id}}</td> 
+       <td>{{name}}</td>
+       <td>{{category.name}}</td>
+       <td>{{cover}}</td>
+       <td>{{featured}}</td> 
+      </tr> 
+    {{/each}}
+  </table>
+{{else}}
+  <div>
+    <h4>No Podcasts Availbale.</h>
+  </div>
+{{/if}}

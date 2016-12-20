@@ -1,6 +1,6 @@
 <div class="jumbotron>" 
-  <h4>Add Podcast<h4>
-  <form method="post" action="/admin/add">
+  <h3>Add Podcast<h3>
+  <form method="post" action="/admin/podcast/add">
     <div class="form-group">
       <label>Name</label>
       <input type="text" class="form-control" name="name" placeholder="Name">
@@ -12,9 +12,9 @@
     <div class="form-group">
       <label>Category</label>
       <select class="form-control" name="category">
-        <option value="123456">Technology</option>
-        <option value="126756">Programming</option>
-        <option value="123256">Health</option>
+        {{#each categories}}
+          <option value={{_id}}>{{name}}</option>
+        {{/each}}
       </select>
     </div>
     <div class="form-group">
@@ -22,12 +22,16 @@
       <input type="text" class="form-control" name="cover" placeholder="Cover Image">
     </div>
     <div class="form-group">
+      <label>Website</label>
+      <input type="text" class="form-control" name="website" placeholder="Website">
+    </div>
+    <div class="form-group">
       <label>Featured</label>
       <select class="form-control" name="featured">
         <option value=true>Yes</option>
-        <option value=false>No</option>
+        <option selected value=false>No</option>
       </select>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-success">Submit</button>
   </form>
 </div>
