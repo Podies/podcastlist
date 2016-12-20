@@ -1,32 +1,33 @@
-<h4>Add Podcast<h4>
-
-<form method="post" action="/admin/add">
-  <div class="form-group">
-    <label>Name</label>
-    <input type="text" class="form-control" name="name" placeholder="Name">
-  </div>
-  <div class="form-group">
-    <label>Description</label>
-    <textarea class="form-control" name="description"rows="3"></textarea>
-  </div>
-  <div class="form-group">
-    <label>Category</label>
-    <select class="form-control" name="category">
-      <option value="123456">Technology</option>
-      <option value="126756">Programming</option>
-      <option value="123256">Health</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label>Cover</label>
-    <input type="text" class="form-control" name="cover" placeholder="Cover Image">
-  </div>
-  <div class="form-group">
-    <label>Featured</label>
-    <select class="form-control" name="featured">
-      <option value=true>Yes</option>
-      <option value=false>No</option>
-    </select>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+<div class="jumbotron>" 
+  <h4>Add Podcast<h4>
+  <form method="post" action="/admin/add">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" name="name" placeholder="Name">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea class="form-control" name="description"rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Category</label>
+      <select class="form-control" name="category">
+        <option value="123456">Technology</option>
+        <option value="126756">Programming</option>
+        <option value="123256">Health</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Cover</label>
+      <input type="text" class="form-control" name="cover" placeholder="Cover Image">
+    </div>
+    <div class="form-group">
+      <label>Featured</label>
+      <select class="form-control" name="featured">
+        <option value=true>Yes</option>
+        <option value=false>No</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
