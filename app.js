@@ -8,6 +8,18 @@ var exphbs = require('express-handlebars');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
+import React from 'react';
+var renderToString = require('react-dom/server').renderToString;
+var match = require('react-router').match;
+var RouterContext = require('react-router').RouterContext;
+
+import clientRoutes from './client/routes';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import rootReducer from './client/reducers/index';
+import fetchComponentData from './utils/fetchData';
+import thunk from 'redux-thunk';
+
 
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
@@ -18,6 +30,24 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/podcastlist', function(err, con){
     console.log(err, 'connected..')
 });
+
+// Setup webpack hot middleware.
+(function() {
+  // Step 1: Create & configure a webpack compiler
+  var webpack = require('webpack');
+  var webpackConfig = require('./webpack.config');
+  var compiler = webpack(webpackConfig);
+
+  // Step 2: Attach the dev middleware to the compiler & the server
+  app.use(require("webpack-dev-middleware")(compiler, {
+    noInfo: true, publicPath: webpackConfig.output.publicPath
+  }));
+
+  // Step 3: Attach the hot middleware to the compiler & the server
+  app.use(require("webpack-hot-middleware")(compiler, {
+    log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000
+  }));
+})();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,9 +61,37 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
 app.use('/admin', admin);
 app.use('/api', api);
+
+app.use('*', function(req, res) {
+  match({ routes: clientRoutes, location: req.originalUrl },
+    (error, redirectLocation, renderProps) => {
+    let initialState = {};
+    const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
+
+    if (error) {
+      res.status(500).send(error.message)
+    } else if (redirectLocation) {
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+    } else if (renderProps) {
+      // You can also check renderProps.components or renderProps.routes for
+      // your "not found" component or route respectively, and send a 404 as
+      // below, if you're using a catch-all route.
+      return fetchComponentData(store, renderProps.components, renderProps.params)
+        .then(() => {
+          const body = renderToString(
+            <Provider store={store}>       
+              <RouterContext {...renderProps} />
+            </Provider>
+          );
+          res.render('index', { layout: false, body: body, initialState: store.getState() });
+        })
+    } else {
+      res.status(404).send('Not found')
+    }
+  })
+});
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
@@ -64,6 +122,12 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {}
     });
+});
+
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + server.address().port);
 });
 
 

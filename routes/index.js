@@ -4,7 +4,7 @@ var path = require('path');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', {layout: false})
+  res.render('dashboard');
 });
 
 module.exports = router;

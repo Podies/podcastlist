@@ -51,7 +51,6 @@ router.post('/podcast/add', function(req, res) {
       if(err) {
         console.log(err);
       }
-      console.log(savedPodcast);
       res.redirect('/admin/podcast');
     });
   }
