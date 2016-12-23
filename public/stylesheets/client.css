@@ -19,6 +19,12 @@
   margin-bottom: 20px;
   padding: 0 0 10px 10px ;
 }
+.sub-featured{
+  display: flex;
+  align-items: center;
+  background: rgba(128, 128, 128, 0.12);
+  margin-bottom: 5px;
+}
 .featured-single{
   margin-bottom: 5px;
 }
@@ -38,7 +44,9 @@
   font-weight: 300;
   padding-bottom: 10px;
 }
-
+.padding-home{
+  margin-top: 100px;
+}
 /* Toggle Styles */
 
 #sidebar-wrapper {

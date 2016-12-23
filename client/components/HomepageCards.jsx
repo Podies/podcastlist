@@ -3,7 +3,7 @@ import HomepageSingleCard from './HomepageSingleCard';
 
 const HomepageCards = () => {
   return(
-    <div className="container">
+    <div className="container padding-home">
         {
           [1,2,3,4,5,6,7,8,9].map((podcast, i) => <HomepageSingleCard key={i} />)
         }
