@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Header from './Header';
-import CategoryCads from './CategoryCads';
+import HomepageCards from './HomepageCards';
 
 
 class Landing extends Component {
@@ -11,7 +11,7 @@ class Landing extends Component {
     return (
       <div>
         <Header />
-        <CategoryCads />
+        <HomepageCards />
       </div>
     )
   }
