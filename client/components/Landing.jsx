@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Header from './Header';
-import * as actions from '../actions'; 
+import CategoryList from './CategoryList';
+
 
 class Landing extends Component {
   constructor(props) {
@@ -10,14 +11,10 @@ class Landing extends Component {
     return (
       <div>
         <Header />
-        <div>
-          Content here.
-        </div>
+        <CategoryList />
       </div>
     )
   }
 }
-
-Landing.need = () => actions.fetchCategory();
 
 export default Landing;
