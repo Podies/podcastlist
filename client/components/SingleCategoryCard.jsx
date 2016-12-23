@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router';
 import FeaturedPodcasts from './FeaturedPodcasts';
 
-const SingleCategory = () => {
+const SingleCategoryCard = () => {
   return (
     <div className="col-md-2 category-item">
       <div className="featured-single">
@@ -15,8 +16,11 @@ const SingleCategory = () => {
       {
         [1,2,3].map((podcast, i) => <FeaturedPodcasts key={i} />)
       }
+      <div className="text-right">
+        <Link>View All</Link>
+      </div>
     </div>
   )
 }
 
-export default SingleCategory;
+export default SingleCategoryCard;

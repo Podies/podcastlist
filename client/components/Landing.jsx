@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Header from './Header';
-import CategoryList from './CategoryList';
+import CategoryCads from './CategoryCads';
 
 
 class Landing extends Component {
@@ -11,7 +11,7 @@ class Landing extends Component {
     return (
       <div>
         <Header />
-        <CategoryList />
+        <CategoryCads />
       </div>
     )
   }
