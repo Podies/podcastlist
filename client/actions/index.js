@@ -14,11 +14,23 @@ const fetchCategory = () => {
   };
 };
 
-const fetchPodcast = () => {
+const fetchPodcasts = (params) => {
   return(dispatch) => {
-    return api.ajaxFetchPodcast()
+    return api.ajaxFetchPodcast(params)
       .then((response) => {
-        dispatch(actions.addpodcast(response.podcasts))
+        dispatch(actions.addPodcast(response.podcasts))
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
+};
+const fetchFeaturedPodcasts = () => {
+  return(dispatch) => {
+    return api.ajaxFetchFeaturedPodcast()
+      .then((response) => {
+        dispatch(actions.addPodcast(response.podcasts))
       },
       (err) => {
         console.log(err);
@@ -27,4 +39,6 @@ const fetchPodcast = () => {
   };
 };
 
-module.exports = fetchCategory, fetchPodcast ;
+export {
+  fetchCategory, fetchPodcasts, fetchFeaturedPodcasts
+}

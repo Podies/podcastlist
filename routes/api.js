@@ -32,18 +32,31 @@ router.get('/categories', function(req, res) {
 });
 
 router.get('/categories/:category/podcasts', function(req, res) {
-  Category.findOne({name: req.params.category}, function(err, category) {
+  let query = req.params.category;
+  Category.findOne({"name": {$regex: query,$options:'i'}}).exec(function(err, category) {
     if(!category) {
       res.status(400).send({message: "Bad Request"});
     }else {
       Podcast.find({category: category._id}).populate('category').exec(function(err, podcasts) {
-        if(err) {
-          console.log(err);
-        }
-        res.json({podcasts: podcasts});
+      if(err) {
+         console.log(err);
+      }
+      res.json({podcasts: podcasts});
       });
     }
   });
 });
+
+router.get('/featured', function(req, res) {
+  Podcast.aggregate([
+    {$match: {featured: true}},
+    {$group: {_id: "$category",podcast: {$push: "$$ROOT"} }},
+    {$limit: 4}]).exec(function(err, podcasts) {
+      if(err) {
+        console.log(err);
+      }
+      res.json({podcasts: podcasts});
+  })
+})
 
 module.exports = router;

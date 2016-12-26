@@ -31,7 +31,7 @@
 .single-subcategory{
   cursor: pointer;
 }
-.subcategory h6{
+.sub-featured h6{
   padding-left: 10px;
 }
 .small-image{
@@ -98,12 +98,7 @@
 /* Sidebar Styles */
 
 .sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 0px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  list-style: none;
 }
 
 .sidebar-nav li {
@@ -115,7 +110,6 @@
     display: block;
     text-decoration: none;
     color: #999999;
-    padding-left: 25px;
 }
 
 .sidebar-nav li a:hover {

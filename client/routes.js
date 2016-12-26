@@ -7,6 +7,6 @@ import CategoryPage from './components/CategoryPage'
 export default (
   <Route component={App} path="/" >
     <IndexRoute component={Landing} />
-    <Route component={CategoryPage} path='/category' />
+    <Route component={CategoryPage} path='/:category' />
   </Route>
 );
