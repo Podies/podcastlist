@@ -10,7 +10,7 @@ const podcasts = (state=initialState, action) => {
       copy.list = action.data;
       copy.listLoaded = true;
       return copy;
-    default: 
+    default:
       return state;
   }
 };

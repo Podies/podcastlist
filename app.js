@@ -9,9 +9,8 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
 import React from 'react';
-var renderToString = require('react-dom/server').renderToString;
-var match = require('react-router').match;
-var RouterContext = require('react-router').RouterContext;
+import { renderToString } from 'react-dom/server';
+import { match, RouterContext } from 'react-router';
 
 import clientRoutes from './client/routes';
 import { Provider } from 'react-redux';
@@ -19,7 +18,6 @@ import { applyMiddleware, createStore } from 'redux';
 import rootReducer from './client/reducers/index';
 import fetchComponentData from './utils/fetchData';
 import thunk from 'redux-thunk';
-
 
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
@@ -81,11 +79,11 @@ app.use('*', function(req, res) {
       return fetchComponentData(store, renderProps.components, renderProps.params)
         .then(() => {
           const body = renderToString(
-            <Provider store={store}>       
+            <Provider store={store}>
               <RouterContext {...renderProps} />
             </Provider>
           );
-          res.render('index', { layout: false, body: body, initialState: store.getState() });
+          res.render('index', { layout: false, body: body, initialState: JSON.stringify(store.getState()) });
         })
     } else {
       res.status(404).send('Not found')

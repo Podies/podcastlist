@@ -1,12 +1,12 @@
 import React from 'react';
 import SingleCategoryCard from './SingleCategoryCard';
 
-const CategoryCards = () => {
+const CategoryCards = (props) => {
   return(
     <div className="col-md-offset-2 col-md-10" style={{marginTop: 50}}>
-      <h2 className="category-name">Health</h2>
+      <h2 className="category-name">{props.list[0].category.name}</h2>
       {
-        [1,2,3,4,5,6,7,8].map((podcast, i) => <SingleCategoryCard key={i} /> )
+        props.list.map((podcast, i) => <SingleCategoryCard podcast={podcast} key={i} /> )
       }
     </div>
   )
