@@ -12,17 +12,18 @@ class Landing extends Component {
     return (
       <div>
         <Header />
-        <HomepageCards />
+        <HomepageCards podcasts={this.props.podcasts} dispatch={this.props.dispatch}/>
       </div>
     )
   }
 }
 
-Landing.need = [() => actions.fetchFeaturedPodcasts()];
+Landing.need = [() => actions.fetchFeaturedPodcasts(), () => actions.fetchCategory()];
 
 function mapStateToProps(state) {
-  return{
-    podcast: state.podcasts
+  return {
+    podcasts: state.podcasts,
+    categories: state.categories
   };
 }
 

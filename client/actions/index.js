@@ -18,7 +18,7 @@ const fetchPodcasts = (params) => {
   return(dispatch) => {
     return api.ajaxFetchPodcast(params)
       .then((response) => {
-        dispatch(actions.addPodcast(response.podcasts))
+        dispatch(actions.addPodcast(response))
       },
       (err) => {
         console.log(err);
@@ -30,7 +30,7 @@ const fetchFeaturedPodcasts = () => {
   return(dispatch) => {
     return api.ajaxFetchFeaturedPodcast()
       .then((response) => {
-        dispatch(actions.addPodcast(response.podcasts))
+        dispatch(actions.addFeaturedPodcasts(response.podcasts))
       },
       (err) => {
         console.log(err);
@@ -38,7 +38,19 @@ const fetchFeaturedPodcasts = () => {
     );
   };
 };
+const searchPodcasts = (data) => {
+  return (dispatch) => {
+    return api.ajaxFetchSearchPodcasts(data).then(
+      (responseData) => {
+        dispatch(actions.searchPodcasts(responseData.search));
+      },
+      (err) => {
+        dispatch(actions.updateFailed(err));
+      }
+    );
+  };
+};
 
 export {
-  fetchCategory, fetchPodcasts, fetchFeaturedPodcasts
+  fetchCategory, fetchPodcasts, fetchFeaturedPodcasts, searchPodcasts
 }

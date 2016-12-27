@@ -38,7 +38,17 @@ const ajaxFetchFeaturedPodcast = () => {
     }
   });
 };
+const ajaxFetchSearchPodcasts = (searchTerm) => {
+  let url = endpoint+'/api/search/'+searchTerm;
+  return axios.get(url)
+    .then((response) => {
+      if (response.status !== 200) {
+        return Promise.reject('No Newsletter Found');
+      }
+      return response.data;
+    });
+}
 
 export {
-  ajaxFetchPodcast, ajaxFetchCategory, ajaxFetchFeaturedPodcast
+  ajaxFetchPodcast, ajaxFetchCategory, ajaxFetchFeaturedPodcast, ajaxFetchSearchPodcasts
 }
