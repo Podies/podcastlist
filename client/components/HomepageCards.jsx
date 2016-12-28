@@ -1,12 +1,20 @@
 import React from 'react';
 import HomepageSingleCard from './HomepageSingleCard';
 
-const HomepageCards = () => {
+const HomepageCards = (props) => {
   return(
     <div className="container padding-home">
-        {
-          [1,2,3,4,5,6,7,8,9].map((podcast, i) => <HomepageSingleCard key={i} />)
-        }
+      {
+        props.podcasts.featured.map((podcasts, i) => {
+          return (
+            <HomepageSingleCard
+              key={i}
+              podcasts={podcasts.podcast}
+              category={podcasts._id}
+              dispatch={props.dispatch}/>
+          );
+        })
+      }
     </div>
   )
 }

@@ -12,6 +12,19 @@ const addPodcast = (data) => {
   };
 };
 
+const addFeaturedPodcasts = (data) => {
+  return {
+    type: 'ADD_FEATURED_PODCASTS',
+    data,
+  }
+}
+const searchPodcasts = (data) => {
+  return {
+    type: 'SEARCH_PODCASTS',
+    data,
+  }
+}
+
 export {
-  updateCategory, addPodcast
+  updateCategory, addPodcast, addFeaturedPodcasts, searchPodcasts
 }

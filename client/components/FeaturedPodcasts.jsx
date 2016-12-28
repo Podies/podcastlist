@@ -1,16 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 
-const FeaturedPodcasts = () => {
-  return(
-    <Link className="single-subcategory">
+const FeaturedPodcasts = (props) => {
+  var featuredImage;
+  if (props.index === 0) {
+    featuredImage = (
+      <img className="img-responsive featured-single" src={props.podcast.cover} alt={props.podcast.name} />
+    )
+  } else {
+    featuredImage = (
       <div className="sub-featured">
-          <img className="img-responsive small-image" src="http://d1vf6nydb9l6bf.cloudfront.net/uploads/podcast/cover/109319/medium_decrypted-1481680186.jpg" alt=""/>
-          <h6>Sub Heading</h6>
-          <img className="podcast-icon" src="/images/podcast-icon.png" alt="Listen to podcast"/>
+        <img className="img-responsive small-image" src={props.podcast.cover} alt={props.podcast.name} />
+        <h6>{props.podcast.name}</h6>
+        <img className="podcast-icon" src="/images/podcast-icon.png" alt="Listen to podcast"/>
       </div>
-    </Link>
+    )
+  }
+  return(
+    <a target="_blank" className="single-subcategory" href={`http://${props.podcast.website}`}>
+    {featuredImage}
+    </a>
   );
 }
 
