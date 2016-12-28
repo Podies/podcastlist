@@ -8,7 +8,8 @@
       <th>Name</th> 
       <th>Category</th>
       <th>Cover</th>
-      <th>Featured</th>   
+      <th>Featured</th>  
+      <th>Edit</th> 
     </tr> 
     {{#each podcasts}}
       <tr>
@@ -16,7 +17,8 @@
        <td>{{name}}</td>
        <td>{{category.name}}</td>
        <td>{{cover}}</td>
-       <td>{{featured}}</td> 
+       <td>{{featured}}</td>
+       <td><a class="btn btn-primary btn-default" href='/admin/podcast/edit/{{_id}}'>Edit</a></td> 
       </tr> 
     {{/each}}
   </table>

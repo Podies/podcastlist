@@ -13,7 +13,7 @@ const CategoryCards = (props) => {
     )
   } else{
       listPodcasts = (
-      <h2 className="text-center">No Podcasts Available!</h2>
+      <h4 className="text-center">No Podcasts Available!</h4>
     )
   }
   return(

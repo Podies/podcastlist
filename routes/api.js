@@ -101,4 +101,30 @@ router.post('/user/subscribe', function(req, res) {
   });
 });
 
+router.post('/user/submitPodcast', function(req, res) {
+  var emailId = req.body.email;
+  var name = req.body.name;
+  var catgory = req.body.category;
+  var description = req.body.description;
+  var cover = req.body.cover;
+  var website = req.body.website;
+
+  var podcast = {
+    name: name,
+    category: category,
+    description: description,
+    cover: cover,
+    website: website
+  };
+  User.findOne({email: emailId}).exec(function(err, user) {
+    if(user) {
+      user.podcastAdded.push(podcast);
+      user.save();
+    } else {
+      var newUser = new User({email: emailId, podcastAdded: podcast});
+      newUser.save();
+    }
+  });
+});
+
 module.exports = router;

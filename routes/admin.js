@@ -56,6 +56,48 @@ router.post('/podcast/add', function(req, res) {
   }
 });
 
+router.get('/podcast/edit/:id', function(req, res) {
+  Category.find({}, function(err, categories) {
+    Podcast.findOne({_id: req.params.id}, function(err, podcast) {
+      if(err) {
+          console.log(err);
+      }
+      var model = {
+          podcast: podcast,
+          categories: categories
+      }
+      res.render('podcast/editpodcast', model);
+    });
+  });
+});
+
+router.post('/podcast/edit/:id', function(req, res) {
+  var name = req.body.name;
+  var description = req.body.description;
+  var category = req.body.category;
+  var cover = req.body.cover;
+  var featured = req.body.featured;
+  var website = req.body.website;
+
+  if(!name || !category || !cover || !website) {
+    res.status(404).send({message:"Name, Category, Cover and Website link are Must..!!"});
+  } else {
+    Podcast.update({_id: req.params.id}, {
+        name: name,
+        description: description,
+        category: category,
+        cover: cover,
+        featured: featured,
+        website: website
+        }, function(err, saved) {
+          if(err) {
+            console.log(err);
+          }
+          res.redirect('/admin/podcast');
+    })
+  }
+})
+
 router.get('/category', function(req, res) {
   Category.find({}, function(err, categories) {
     if(err){

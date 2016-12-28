@@ -4,6 +4,7 @@ var Schema = mongoose.Schema
 var userSchema = Schema({
   email: String,
   categorySubscribed: [{type: Schema.Types.ObjectId, ref: 'Category'}],
+  podcastAdded: [],
 });
 
 
