@@ -9,9 +9,11 @@ class CategoryPage extends Component {
   render() {
     return(
       <div>
-        <Header />
+        <Header {...this.props}/>
         <Sidebar {...this.props}/>
-        <CategoryCards {...this.props.podcasts}/>
+        <div className="col-md-offset-2 col-md-10" style={{marginTop: 50}}>
+          <CategoryCards {...this.props.podcasts}/>
+        </div>
       </div>
     )
   }

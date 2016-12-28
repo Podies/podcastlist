@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Category = require('../models/category');
 var Podcast = require('../models/podcast');
+var User = require('../models/user');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -67,6 +68,36 @@ router.get('/search/:searchTerm', function(req, res){
       console.log(err);
     }
     res.json({search: data});
+  });
+});
+
+router.post('/user/subscribe', function(req, res) {
+  // console.log("called in api");
+  var emailId = req.body.email;
+  if(!emailId) {
+    return res.status(400).send({message: 'Enter Valid Email.'})
+  }
+  User.findOne({email: emailId}).exec(function(err, user){
+    if(user) {
+      var subscriptions = user.categorySubscribed;
+      var newSubscriptions = req.body.categories;
+
+      newSubscriptions.forEach(function(sub, i) {
+        if(subscriptions.indexOf(sub) == -1) {
+          subscriptions.push(sub);
+        }
+      });
+
+      user.categorySubscribed = subscriptions;
+      user.save();
+    } else {
+      // make new user with subscribed subcategories
+      var newUser = new User({email: req.body.email, categorySubscribed: req.body.categories});
+      newUser.save();
+    }
+
+    res.json({ message: 'Thanks for subscribing.' });
+
   });
 });
 

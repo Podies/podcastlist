@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from './Header';
 import CategoryCards from './CategoryCards';
+import { connect } from 'react-redux';
 
-const SearchPage = (props) => {
-  return(
-    <div>
-      <Header />
-    </div>
-  )
+class SearchPage extends Component {
+  constructor(props){
+    super(props);
+  }
+  render(){
+    return(
+      <div>
+        <Header {...this.props} />
+        <CategoryCards {...this.props.podcasts} />
+      </div>
+    )
+  }
 }
 
-export default SearchPage;
+function mapStateToProps(state){
+  return {
+    podcasts: state.podcasts,
+  };
+}
+
+export default connect(mapStateToProps)(SearchPage);

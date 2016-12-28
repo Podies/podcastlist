@@ -11,7 +11,7 @@ class Landing extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header dispatch={this.props.dispatch}/>
         <HomepageCards podcasts={this.props.podcasts} dispatch={this.props.dispatch}/>
       </div>
     )

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import * as actions from '../actions';
+import { connect } from 'react-redux';
 
 class Header extends Component {
   constructor(props){
     super(props);
-    this.searchPodcasts = this.searchPodcasts.bind(this);
+    this.searchInPodcasts = this.searchInPodcasts.bind(this);
   }
-  searchPodcasts(e) {
+  searchInPodcasts(e) {
     if(e.keyCode == 13) {
       this.props.dispatch(actions.searchPodcasts(this.refs.searchText.value)).then(() => {
       this.context.router.push('/search?text='+this.refs.searchText.value);
@@ -29,14 +30,14 @@ class Header extends Component {
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
               <li>
-                <a href="#">Submit Podcast</a>
+                <a href="/subscribe">Subscribe Podcast</a>
               </li>
             </ul>
             <div className="col-sm-3 col-md-3 pull-right">
             <div className="input-group search-box">
               <input type="text" className="form-control"
                 ref="searchText" placeholder="Search"
-                onKeyDown={this.searchPodcasts} />
+                onKeyDown={this.searchInPodcasts} />
             </div>
           </div>
           </div>
@@ -46,8 +47,9 @@ class Header extends Component {
   }
 }
 
-Header.ontextTypes= {
+Header.contextTypes= {
   router: React.PropTypes.object,
 }
+
 
 export default Header;

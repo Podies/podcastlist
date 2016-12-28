@@ -2,12 +2,24 @@ import React from 'react';
 import SingleCategoryCard from './SingleCategoryCard';
 
 const CategoryCards = (props) => {
+  var listPodcasts;
+  if (props.list.length) {
+    listPodcasts = (
+      <div>
+        {
+          props.list.map((podcast, i) => <SingleCategoryCard podcast={podcast} key={i} /> )
+        }
+      </div>
+    )
+  } else{
+      listPodcasts = (
+      <h2>No Podcasts Available!</h2>
+    )
+  }
   return(
-    <div className="col-md-offset-2 col-md-10" style={{marginTop: 50}}>
+    <div>
       <h2 className="category-name">{props.category.name}</h2>
-      {
-        props.list.map((podcast, i) => <SingleCategoryCard podcast={podcast} key={i} /> )
-      }
+      {listPodcasts}
     </div>
   )
 }

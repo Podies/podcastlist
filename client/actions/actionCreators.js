@@ -26,5 +26,5 @@ const searchPodcasts = (data) => {
 }
 
 export {
-  updateCategory, addPodcast, addFeaturedPodcasts
+  updateCategory, addPodcast, addFeaturedPodcasts, searchPodcasts
 }

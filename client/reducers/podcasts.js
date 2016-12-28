@@ -18,6 +18,9 @@ const podcasts = (state=initialState, action) => {
     case 'ADD_FEATURED_PODCASTS':
       copy.featured = action.data;
       return copy;
+    case 'SEARCH_PODCASTS':
+      copy.list = action.data;
+      return copy;
     default:
       return state;
   }

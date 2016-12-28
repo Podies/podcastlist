@@ -48,7 +48,16 @@ const ajaxFetchSearchPodcasts = (searchTerm) => {
       return response.data;
     });
 }
+const ajaxSubscribe = (info) => {
+  let url = endpoint+'/api/user/subscribe';
+
+  return axios.post(url, info)
+    .then((response) => {
+      // console.log(info, "called in ajax");
+      return console.log('Submitted Successfully');
+    });
+}
 
 export {
-  ajaxFetchPodcast, ajaxFetchCategory, ajaxFetchFeaturedPodcast, ajaxFetchSearchPodcasts
+  ajaxFetchPodcast, ajaxFetchCategory, ajaxFetchFeaturedPodcast, ajaxFetchSearchPodcasts, ajaxSubscribe
 }
