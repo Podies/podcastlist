@@ -9,7 +9,7 @@ const SingleCategoryCard = (props) => {
           <div className="inner-info">
             <h3>{props.podcast.name}</h3>
             <p>{props.podcast.description}</p>
-            <a target="_blank" href={`http://${props.podcast.website}`} className="button-listen">Listen</a>
+            <a target="_blank" href={`${props.podcast.website}`} className="button-listen">Listen</a>
           </div>
       </div>
     </div>
