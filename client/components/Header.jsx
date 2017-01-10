@@ -35,7 +35,7 @@ class Header extends Component {
             </ul>
             <div className="col-sm-3 col-md-3 pull-right">
             <div className="input-group search-box">
-              <input type="text" className="form-control"
+              <input type="text" className="search-box"
                 ref="searchText" placeholder="Search"
                 onKeyDown={this.searchInPodcasts} />
             </div>
